@@ -1,4 +1,4 @@
-# Ad-Hoc Multifactorial ANOVA - J. Zubcoff Methodology
+# Ad-Hoc Multifactorial ANOVA - Jose Zubcoff's Methodology
 
 A rigorous algorithmic engine for designing multifactorial ANOVA models based on Restricted Mixed Models. This tool automates the generation of linear models, Degrees of Freedom (DF), Expected Mean Squares (E[MS]) matrices, and exact $F$-test denominators. Also optimises the final model.
 
