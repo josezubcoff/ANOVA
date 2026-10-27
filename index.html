@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-50">
+<html lang="en" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANOVA Multifactorial Ad-Hoc - Metodología J. Zubcoff</title>
+    <title>Ad-Hoc Multifactorial ANOVA – J. Zubcoff Methodology</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -73,43 +73,50 @@
                     <i data-lucide="calculator" class="w-6 h-6 text-white"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight text-white">ANOVA Multifactorial Ad-Hoc</h1>
-                    <p class="text-xs text-brand-200 font-medium mt-0.5">
-                        Motor Algorítmico Riguroso - Modelo Mixto Restringido (Metodología J. Zubcoff)
+                    <h1 class="font-bold text-lg leading-tight text-white" data-i18n="appTitle">Ad-Hoc Multifactorial ANOVA</h1>
+                    <p class="text-xs text-brand-200 font-medium mt-0.5" data-i18n="appSubtitle">
+                        Rigorous algorithmic engine – Restricted mixed model (J. Zubcoff methodology)
                     </p>
                 </div>
             </div>
-            <div class="flex items-center space-x-2 text-xs bg-slate-800/90 px-3 py-1.5 rounded-full border border-slate-700">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-slate-300">Motor Algorítmico Activo</span>
+            <div class="flex items-center gap-3">
+                <div class="flex items-center space-x-2 text-xs bg-slate-800/90 px-3 py-1.5 rounded-full border border-slate-700">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-slate-300" data-i18n="engineActive">Algorithmic engine active</span>
+                </div>
+                <!-- Language switch / Selector de idioma -->
+                <div class="flex items-center text-xs bg-slate-800/90 rounded-full border border-slate-700 p-0.5" role="group" aria-label="Language / Idioma">
+                    <button type="button" id="lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-full font-semibold transition-colors" title="English">EN</button>
+                    <button type="button" id="lang-es" onclick="setLang('es')" class="px-2.5 py-1 rounded-full font-semibold transition-colors" title="Español">ES</button>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
+
         <!-- Left Panel: Configuration & Factor Builder (4 Cols) -->
         <section class="lg:col-span-4 flex flex-col gap-6">
-            
+
             <!-- Factor Configuration Card -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="bg-slate-100/80 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
                     <h2 class="font-semibold text-slate-800 flex items-center gap-2 text-sm">
                         <i data-lucide="layers" class="w-4 h-4 text-brand-600"></i>
-                        1. Definición de Factores
+                        <span data-i18n="factorDefinition">1. Factor definition</span>
                     </h2>
-                    <span id="factor-count-badge" class="bg-brand-100 text-brand-800 text-xs px-2 py-0.5 rounded-full font-semibold">3 Factores</span>
+                    <span id="factor-count-badge" class="bg-brand-100 text-brand-800 text-xs px-2 py-0.5 rounded-full font-semibold">3 Factors</span>
                 </div>
-                
+
                 <div class="p-4 space-y-4">
                     <!-- Global Settings -->
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex items-center justify-between">
                         <label for="replicas-input" class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
                             <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-500"></i>
-                            Réplicas ($n$):
+                            <span data-i18n="replicatesLbl">Replicates ($n$):</span>
                         </label>
-                        <input type="number" id="replicas-input" min="1" max="100" value="3" 
+                        <input type="number" id="replicas-input" min="1" max="100" value="3"
                             class="w-16 px-2 py-1 text-sm text-center border border-slate-300 rounded-md focus:ring-2 focus:ring-brand-500 focus:outline-none font-semibold">
                     </div>
 
@@ -119,9 +126,9 @@
                     </div>
 
                     <!-- Add Factor Button -->
-                    <button id="add-factor-btn" type="button" 
+                    <button id="add-factor-btn" type="button"
                         class="w-full py-2 px-3 border-2 border-dashed border-brand-500 text-brand-600 hover:bg-brand-50 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
-                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir Nuevo Factor
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i> <span data-i18n="addFactor">Add new factor</span>
                     </button>
                 </div>
             </div>
@@ -129,20 +136,20 @@
             <!-- Quick Preset Examples -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
                 <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                    <i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Diseños de Ejemplo (J. Zubcoff)
+                    <i data-lucide="bookmark" class="w-3.5 h-3.5"></i> <span data-i18n="examples">Example designs (J. Zubcoff)</span>
                 </h3>
                 <div class="grid grid-cols-1 gap-2">
                     <button onclick="loadPreset('case1')" class="text-left text-xs p-2.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors">
-                        <span class="font-bold text-slate-700 block">Caso 1: Ortogonal + Anidamiento Completo</span>
-                        <span class="text-slate-500 text-[11px]">Protección (F), Región (F), Sitio anidado en P×R (A)</span>
+                        <span class="font-bold text-slate-700 block" data-i18n="case1Title">Case 1: Orthogonal + full nesting</span>
+                        <span class="text-slate-500 text-[11px]" data-i18n="case1Desc">Protection (F), Region (F), Site nested in P×R (R)</span>
                     </button>
                     <button onclick="loadPreset('case2')" class="text-left text-xs p-2.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors">
-                        <span class="font-bold text-slate-700 block">Caso 2: Ortogonal + Anidamiento Parcial</span>
-                        <span class="text-slate-500 text-[11px]">Protección (F), Región (F), Sitio anidado en R (A)</span>
+                        <span class="font-bold text-slate-700 block" data-i18n="case2Title">Case 2: Orthogonal + partial nesting</span>
+                        <span class="text-slate-500 text-[11px]" data-i18n="case2Desc">Protection (F), Region (F), Site nested in R (R)</span>
                     </button>
                     <button onclick="loadPreset('threeWayCross')" class="text-left text-xs p-2.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors">
-                        <span class="font-bold text-slate-700 block">Trifactorial Ortogonal Fijo</span>
-                        <span class="text-slate-500 text-[11px]">3 Factores Fijos Ortogonales ($A \times B \times C$)</span>
+                        <span class="font-bold text-slate-700 block" data-i18n="threeWayTitle">Three-way orthogonal, fixed</span>
+                        <span class="text-slate-500 text-[11px]" data-i18n="threeWayDesc">3 orthogonal fixed factors ($A \times B \times C$)</span>
                     </button>
                 </div>
             </div>
@@ -155,27 +162,27 @@
             <!-- Navigation Tabs for Steps -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-1.5 flex flex-wrap gap-1">
                 <button onclick="switchTab('tab-model')" id="btn-tab-model" class="tab-btn active px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 bg-brand-600 text-white transition-all">
-                    <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Modelo Lineal & GL
+                    <i data-lucide="file-text" class="w-3.5 h-3.5"></i> <span data-i18n="tabModel">Linear model & df</span>
                 </button>
                 <button onclick="switchTab('tab-coefficients')" id="btn-tab-coefficients" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 text-slate-600 hover:bg-slate-100 transition-all">
-                    <i data-lucide="grid" class="w-3.5 h-3.5"></i> Matriz CM ($E[MS]$)
+                    <i data-lucide="grid" class="w-3.5 h-3.5"></i> <span data-i18n="tabCoef">MS matrix ($E[MS]$)</span>
                 </button>
                 <button onclick="switchTab('tab-fratio')" id="btn-tab-fratio" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 text-slate-600 hover:bg-slate-100 transition-all">
-                    <i data-lucide="git-commit" class="w-3.5 h-3.5"></i> Test F & Denominadores
+                    <i data-lucide="git-commit" class="w-3.5 h-3.5"></i> <span data-i18n="tabF">F test & denominators</span>
                 </button>
                 <button onclick="switchTab('tab-optimization')" id="btn-tab-optimization" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 text-slate-600 hover:bg-slate-100 transition-all">
-                    <i data-lucide="zap" class="w-3.5 h-3.5"></i> Optimización
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i> <span data-i18n="tabOpt">Optimization</span>
                 </button>
             </div>
 
             <!-- TAB 1: Linear Model & Degrees of Freedom -->
             <div id="tab-model" class="tab-content flex flex-col gap-6">
-                
+
                 <!-- Formal Linear Model Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
                     <h3 class="text-sm font-semibold text-slate-800 mb-3 flex items-center gap-2">
                         <i data-lucide="variable" class="w-4 h-4 text-brand-600"></i>
-                        2. Modelo Lineal Formal
+                        <span data-i18n="formalModel">2. Formal linear model</span>
                     </h3>
                     <div class="p-4 bg-slate-900 text-slate-100 rounded-lg overflow-x-auto text-center border border-slate-800">
                         <div id="linear-model-latex" class="latex-render text-lg"></div>
@@ -187,16 +194,16 @@
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
                     <h3 class="text-sm font-semibold text-slate-800 mb-3 flex items-center gap-2">
                         <i data-lucide="table" class="w-4 h-4 text-brand-600"></i>
-                        3. Fuentes de Variación y Grados de Libertad (GL)
+                        <span data-i18n="dfTitle">3. Sources of variation and degrees of freedom (df)</span>
                     </h3>
                     <div class="overflow-x-auto table-scrollbar">
                         <table class="w-full text-xs text-left border-collapse">
                             <thead>
                                 <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
-                                    <th class="p-2.5 font-semibold">Fuente de Variación</th>
-                                    <th class="p-2.5 font-semibold text-center">Tipo</th>
-                                    <th class="p-2.5 font-semibold">Fórmula GL</th>
-                                    <th class="p-2.5 font-semibold text-right">GL Calculado</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thSource">Source of variation</th>
+                                    <th class="p-2.5 font-semibold text-center" data-i18n="thType">Type</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thDfFormula">df formula</th>
+                                    <th class="p-2.5 font-semibold text-right" data-i18n="thDf">df</th>
                                 </tr>
                             </thead>
                             <tbody id="anova-df-tbody" class="divide-y divide-slate-100">
@@ -210,47 +217,50 @@
 
             <!-- TAB 2: Coefficient Matrix & Expected Mean Squares -->
             <div id="tab-coefficients" class="tab-content hidden flex flex-col gap-6">
-                
+
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
                     <div class="flex justify-between items-start mb-3">
                         <div>
                             <h3 class="text-sm font-semibold text-slate-800 flex items-center gap-2">
                                 <i data-lucide="grid" class="w-4 h-4 text-brand-600"></i>
-                                4. Algoritmo de Coeficientes para Estimas de Cuadrados Medios ($E[MS]$)
+                                <span data-i18n="coefTitle">4. Coefficient algorithm for expected mean squares ($E[MS]$)</span>
                             </h3>
-                            <p class="text-xs text-slate-500 mt-0.5">Matriz construida evaluando los subíndices de cada término según las reglas de factores fijos y aleatorios.</p>
+                            <p class="text-xs text-slate-500 mt-0.5" data-i18n="coefIntro">Matrix built by evaluating each term's subscripts with the rules for fixed and random factors.</p>
                         </div>
                     </div>
 
                     <!-- Rules Summary Box -->
                     <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800 mb-4 space-y-1">
                         <p class="font-semibold flex items-center gap-1">
-                            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Reglas de asignación de coeficientes (Metodología J. Zubcoff):
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> <span data-i18n="rulesTitle">Coefficient assignment rules (J. Zubcoff methodology):</span>
                         </p>
                         <ul class="list-disc list-inside space-y-0.5 text-[11px] text-amber-900">
-                            <li><strong>Subíndice FIJO:</strong> Si NO está en la fila $\rightarrow$ su nivel ($p, r...$); si está ANIDADO (dentro de paréntesis) $\rightarrow$ 1; si está en la fila sin anidar $\rightarrow$ 0.</li>
-                            <li><strong>Subíndice ALEATORIO:</strong> Si NO está en la fila $\rightarrow$ su nivel ($s, n...$); si ESTÁ en la fila $\rightarrow$ 1.</li>
+                            <li data-i18n-html="ruleFixed"><strong>FIXED subscript:</strong> if it is NOT in the row $\rightarrow$ its number of levels ($p, r...$); if it is NESTED (inside the parentheses) $\rightarrow$ 1; if it is in the row but not nested $\rightarrow$ 0.</li>
+                            <li data-i18n-html="ruleRandom"><strong>RANDOM subscript:</strong> if it is NOT in the row $\rightarrow$ its number of levels ($s, n...$); if it IS in the row $\rightarrow$ 1.</li>
                         </ul>
                     </div>
 
-                    <!-- Matrix Table -->
-                    <div class="overflow-x-auto table-scrollbar mb-6">
-                        <table class="w-full text-xs text-center border-collapse">
-                            <thead id="matrix-thead">
-                                <!-- Dynamic Headers -->
-                            </thead>
-                            <tbody id="matrix-tbody" class="divide-y divide-slate-200">
-                                <!-- Dynamic Coefficients -->
-                            </tbody>
-                        </table>
+                    <!-- Step-by-step E[MS] table : selecting a row shades the omitted rows and columns -->
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="emsStepTitle">Step-by-step calculation of the MS estimators</h4>
+                        <p class="text-xs text-slate-500 mb-3" data-i18n="emsStepIntro">Click a row (or use the buttons) to see how its E[MS] is obtained. The table starts with the Residual and moves up, from simplest to most complex. Red columns and lavender rows are the ones left out.</p>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700 mb-3">
+                            <p class="font-semibold mb-1" data-i18n="emsRulesTitle">Rules for the MS estimators:</p>
+                            <ol class="list-[upper-roman] list-inside space-y-0.5 text-[11px]">
+                                <li data-i18n-html="emsRule1">Choose the target <strong>row</strong> and identify its subscripts. The <strong>rows</strong> that contain all of those subscripts take part (the rest are discarded), and so do the <strong>columns</strong> that do NOT contain them.</li>
+                                <li data-i18n-html="emsRule2">In each participating row, multiply the visible coefficients by that row's variance (σ², or Φ for a fixed term).</li>
+                                <li data-i18n-html="emsRule3">Add up all those components. The variance of the residual is σ²<sub>e</sub>.</li>
+                            </ol>
+                        </div>
+                        <div id="ems-steps"></div>
                     </div>
 
                     <!-- Formal E[MS] Expressions (Explicitly Left Aligned) -->
                     <div class="flex items-center justify-between mb-2">
-                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                            Estimadores de Cuadrados Medios ($E[MS]$)
+                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider" data-i18n="emsTitle">
+                            Expected mean squares ($E[MS]$)
                         </h4>
-                        <span class="text-[11px] text-slate-500 italic">Justificados a la izquierda según la metodología</span>
+                        <span class="text-[11px] text-slate-500 italic" data-i18n="emsAlign">Left-aligned, as in the methodology</span>
                     </div>
 
                     <div id="ems-formulas-list" class="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200 text-left">
@@ -262,14 +272,14 @@
 
             <!-- TAB 3: F-Ratios and Denominators -->
             <div id="tab-fratio" class="tab-content hidden flex flex-col gap-6">
-                
+
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
                     <h3 class="text-sm font-semibold text-slate-800 mb-2 flex items-center gap-2">
                         <i data-lucide="git-commit" class="w-4 h-4 text-brand-600"></i>
-                        5. Determinación de Denominadores para la Razón $F$
+                        <span data-i18n="fTitle">5. Denominators for the $F$ ratio</span>
                     </h3>
-                    <p class="text-xs text-slate-500 mb-4">
-                        Para contrastar cada efecto, se selecciona como denominador el Cuadrado Medio ($CM$) cuya expectativa matemática ($E[MS]$) sea idéntica a la del numerador, <strong>excepto por el término a contrastar</strong>. Si no existe un único denominador factible, se indica <strong>"No Test"</strong>.
+                    <p class="text-xs text-slate-500 mb-4" data-i18n-html="fIntro">
+                        To test each effect, the denominator is the mean square ($MS$) whose expectation ($E[MS]$) is identical to the numerator's, <strong>except for the term being tested</strong>. If no single valid denominator exists, <strong>"No test"</strong> is shown.
                     </p>
 
                     <!-- Group Legend -->
@@ -281,10 +291,10 @@
                         <table class="w-full text-xs text-left border-collapse">
                             <thead>
                                 <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
-                                    <th class="p-2.5 font-semibold">Fuente de Variación (Efecto)</th>
-                                    <th class="p-2.5 font-semibold">Denominador de $F$</th>
-                                    <th class="p-2.5 font-semibold">Contraste Formal ($F_{calc}$)</th>
-                                    <th class="p-2.5 font-semibold">Distribución Bajo $H_0$</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thEffect">Source of variation (effect)</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thDenom">$F$ denominator</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thFormal">Formal test ($F_{calc}$)</th>
+                                    <th class="p-2.5 font-semibold" data-i18n="thDist">Distribution under $H_0$</th>
                                 </tr>
                             </thead>
                             <tbody id="fratio-tbody" class="divide-y divide-slate-100">
@@ -296,15 +306,15 @@
 
             </div>
 
-            <!-- TAB 4: Módulo de Optimización (Dynamic) -->
+            <!-- TAB 4: Optimization Module (Dynamic) -->
             <div id="tab-optimization" class="tab-content hidden flex flex-col gap-6">
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
                     <div class="flex items-center gap-2 mb-2">
                         <i data-lucide="zap" class="w-5 h-5 text-amber-500"></i>
-                        <h2 class="text-lg font-bold text-slate-800">6. Módulo de Optimización del Diseño Ad-Hoc</h2>
+                        <h2 class="text-lg font-bold text-slate-800" data-i18n="optTitle">6. Ad-hoc design optimization</h2>
                     </div>
-                    <p class="text-sm text-slate-600 mb-6">Estrategia metodológica para maximizar la potencia del test $F$ en los contrastes de mayor interés científico.</p>
-                    
+                    <p class="text-sm text-slate-600 mb-6" data-i18n="optIntro">Methodological strategy to maximize the power of the $F$ test for the contrasts of greatest scientific interest.</p>
+
                     <div id="dynamic-optimization-content">
                         <!-- Injected via JS -->
                     </div>
@@ -320,35 +330,35 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div class="border-b border-slate-800 pb-6">
                 <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i data-lucide="star" class="w-4 h-4 text-amber-400"></i> Características Principales de la Aplicación (Key Features)
+                    <i data-lucide="star" class="w-4 h-4 text-amber-400"></i> <span data-i18n="featuresTitle">Key features</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-slate-400 text-[11px]">
-                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800">
-                        <strong class="text-slate-200 block mb-1">1. Modelado Ad-Hoc Dinámico</strong>
-                        Configuración flexible de factores (fijos/aleatorios, ortogonales o anidados en múltiples combinaciones) y número de réplicas.
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800" data-i18n-html="feature1">
+                        <strong class="text-slate-200 block mb-1">1. Dynamic ad-hoc modelling</strong>
+                        Flexible factor set-up (fixed/random, orthogonal or nested in multiple combinations) and number of replicates.
                     </div>
-                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800">
-                        <strong class="text-slate-200 block mb-1">2. Sintaxis Matemática Limpia</strong>
-                        Generación formal de modelos lineales sin paréntesis redundantes en interacciones fijas (ej. $P \times R$).
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800" data-i18n-html="feature2">
+                        <strong class="text-slate-200 block mb-1">2. Clean mathematical syntax</strong>
+                        Formal linear models without redundant parentheses in fixed interactions (e.g. $P \times R$).
                     </div>
-                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800">
-                        <strong class="text-slate-200 block mb-1">3. Algoritmo de Matriz E[MS]</strong>
-                        Estructura automatizada de estimas de cuadrados medios aplicando las reglas de coeficientes de modelos mixtos restringidos.
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800" data-i18n-html="feature3">
+                        <strong class="text-slate-200 block mb-1">3. E[MS] matrix algorithm</strong>
+                        Automated structure of expected mean squares: Cornfield-Tukey algorithm under the restricted mixed model assumption.
                     </div>
-                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800">
-                        <strong class="text-slate-200 block mb-1">4. Evaluación de Denominadores</strong>
-                        Comparación estricta de componentes de varianza en $E[MS]$ para encontrar denominadores exactos (o alertar "No Test").
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-800" data-i18n-html="feature4">
+                        <strong class="text-slate-200 block mb-1">4. Denominator evaluation</strong>
+                        Strict comparison of variance components in $E[MS]$ to find exact denominators (or flag "No test").
                     </div>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-400">
                 <div class="space-y-1 text-center sm:text-left">
-                    <p class="font-semibold text-slate-200">Basado en la metodología de las diapositivas del Prof. Jose Jacobo Zubcoff</p>
-                    <p class="text-slate-400 text-[11px]">Departamento de Ciencias del Mar y Biología Aplicada — Universidad de Alicante (UA)</p>
+                    <p class="font-semibold text-slate-200" data-i18n="basedOn">Based on the methodology in Prof. Jose Jacobo Zubcoff's slides</p>
+                    <p class="text-slate-400 text-[11px]" data-i18n="department">Department of Marine Science and Applied Biology — University of Alicante (UA)</p>
                 </div>
                 <div class="flex items-center gap-2 text-slate-400 bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700/50 text-[11px]">
                     <i data-lucide="creative-commons" class="w-5 h-5 text-slate-300"></i>
-                    <span>Licencia <strong>Creative Commons BY-SA 4.0</strong> / Copyleft Prof. Jose Jacobo Zubcoff</span>
+                    <span data-i18n-html="license"><strong>Creative Commons BY-SA 4.0</strong> license / Copyleft Prof. Jose Jacobo Zubcoff</span>
                 </div>
             </div>
         </div>
@@ -356,6 +366,349 @@
 
     <!-- App State & Logic Script -->
     <script>
+        // ===================== Interface texts / Textos de la interfaz =====================
+        // Only interface texts and messages change with the language; calculations are identical.
+        // Solo cambian los textos y mensajes de la interfaz; los cálculos son idénticos.
+        const I18N = {
+            en: {
+                // Static interface
+                docTitle: 'Ad-Hoc Multifactorial ANOVA – J. Zubcoff Methodology',
+                appTitle: 'Ad-Hoc Multifactorial ANOVA',
+                appSubtitle: 'Rigorous algorithmic engine – Restricted mixed model (J. Zubcoff methodology)',
+                engineActive: 'Algorithmic engine active',
+                factorDefinition: '1. Factor definition',
+                replicatesLbl: 'Replicates ($n$):',
+                addFactor: 'Add new factor',
+                examples: 'Example designs (J. Zubcoff)',
+                case1Title: 'Case 1: Orthogonal + full nesting',
+                case1Desc: 'Protection (F), Region (F), Site nested in P×R (R)',
+                case2Title: 'Case 2: Orthogonal + partial nesting',
+                case2Desc: 'Protection (F), Region (F), Site nested in R (R)',
+                threeWayTitle: 'Three-way orthogonal, fixed',
+                threeWayDesc: '3 orthogonal fixed factors ($A \\times B \\times C$)',
+                tabModel: 'Linear model & df',
+                tabCoef: 'MS matrix ($E[MS]$)',
+                tabF: 'F test & denominators',
+                tabOpt: 'Optimization',
+                formalModel: '2. Formal linear model',
+                dfTitle: '3. Sources of variation and degrees of freedom (df)',
+                thSource: 'Source of variation',
+                thType: 'Type',
+                thDfFormula: 'df formula',
+                thDf: 'df',
+                coefTitle: '4. Coefficient algorithm for expected mean squares ($E[MS]$)',
+                coefIntro: "Matrix built by evaluating each term's subscripts with the rules for fixed and random factors.",
+                rulesTitle: 'Coefficient assignment rules (J. Zubcoff methodology):',
+                ruleFixed: '<strong>FIXED subscript:</strong> if it is NOT in the row $\\rightarrow$ its number of levels ($p, r...$); if it is NESTED (inside the parentheses) $\\rightarrow$ 1; if it is in the row but not nested $\\rightarrow$ 0.',
+                ruleRandom: '<strong>RANDOM subscript:</strong> if it is NOT in the row $\\rightarrow$ its number of levels ($s, n...$); if it IS in the row $\\rightarrow$ 1.',
+                emsTitle: 'Expected mean squares ($E[MS]$)',
+                emsAlign: 'Left-aligned, as in the methodology',
+                fTitle: '5. Denominators for the $F$ ratio',
+                fIntro: "To test each effect, the denominator is the mean square ($MS$) whose expectation ($E[MS]$) is identical to the numerator's, <strong>except for the term being tested</strong>. If no single valid denominator exists, <strong>\"No test\"</strong> is shown.",
+                thEffect: 'Source of variation (effect)',
+                thDenom: '$F$ denominator',
+                thFormal: 'Formal test ($F_{calc}$)',
+                thDist: 'Distribution under $H_0$',
+                optTitle: '6. Ad-hoc design optimization',
+                optIntro: 'Methodological strategy to maximize the power of the $F$ test for the contrasts of greatest scientific interest.',
+                featuresTitle: 'Key features',
+                feature1: '<strong class="text-slate-200 block mb-1">1. Dynamic ad-hoc modelling</strong> Flexible factor set-up (fixed/random, orthogonal or nested in multiple combinations) and number of replicates.',
+                feature2: '<strong class="text-slate-200 block mb-1">2. Clean mathematical syntax</strong> Formal linear models without redundant parentheses in fixed interactions (e.g. $P \\times R$).',
+                feature3: '<strong class="text-slate-200 block mb-1">3. E[MS] matrix algorithm</strong> Automated structure of expected mean squares: Cornfield-Tukey algorithm under the restricted mixed model assumption.',
+                feature4: '<strong class="text-slate-200 block mb-1">4. Denominator evaluation</strong> Strict comparison of variance components in $E[MS]$ to find exact denominators (or flag "No test").',
+                basedOn: "Based on the methodology in Prof. Jose Jacobo Zubcoff's slides",
+                department: 'Department of Marine Science and Applied Biology — University of Alicante (UA)',
+                license: '<strong>Creative Commons BY-SA 4.0</strong> license / Copyleft Prof. Jose Jacobo Zubcoff',
+                // Step-by-step E[MS] table 
+                emsStepTitle: 'Step-by-step calculation of the MS estimators',
+                emsStepIntro: 'Click a row (or use the buttons) to see how its E[MS] is obtained. The table starts with the Residual and moves up, from simplest to most complex. Red columns and lavender rows are the ones left out.',
+                emsRulesTitle: 'Rules for the MS estimators:',
+                emsRule1: 'Choose the target <strong>row</strong> and identify its subscripts. The <strong>rows</strong> that contain all of those subscripts take part (the rest are discarded), and so do the <strong>columns</strong> that do NOT contain them.',
+                emsRule2: "In each participating row, multiply the visible coefficients by that row's variance (σ², or Φ for a fixed term).",
+                emsRule3: 'Add up all those components. The variance of the residual is σ²<sub>e</sub>.',
+                btnStart: '▲ Start from the Residual',
+                btnPrev: '▼ Previous row',
+                btnNext: 'Next row ▲',
+                btnClear: 'Show full table',
+                stepOf: (k, m) => `Step ${k} of ${m} · bottom to top`,
+                selectHint: 'or click any row of the table.',
+                selectRowTitle: 'Use this row as the target row',
+                legendCols: 'Omitted columns (subscripts of the target row)',
+                legendRows: 'Rows that do not contain those subscripts',
+                legendMark: 'Subscripts of the target row',
+                thEstimator: 'MS estimator',
+                targetRow: 'Target row',
+                subsLbl: 'Subscripts',
+                colsLbl: 'Columns',
+                colsUsed: list => `Participating: ${list}`,
+                colsNone: 'No columns left: the coefficient is 1',
+                rowsOmitted: 'Omitted rows',
+                none: 'None',
+                noContribution: '= 0 → does not contribute',
+                noCols: '(no columns)',
+                // Example factor names
+                nameP: 'Protection', nameR: 'Region', nameS: 'Site',
+                // Factor cards
+                factorsCount: n => `${n} ${n === 1 ? 'Factor' : 'Factors'}`,
+                optOrthogonal: 'Orthogonal (not nested)',
+                optNestedIn: term => `Nested in ${term}`,
+                optNestedInInteraction: term => `Nested in interaction (${term})`,
+                termInModel: term => `Term in the model: ${term}`,
+                fixedNoNest: 'Fixed factors cannot be nested in this methodology',
+                removeFactorTitle: 'Remove factor',
+                labelLbl: 'Label',
+                subscriptLbl: 'subscript',
+                factorType: 'Factor type',
+                optFixed: 'Fixed (F)',
+                optRandom: 'Random (R)',
+                levelsLbl: 'No. of levels',
+                structureLbl: 'Relational structure',
+                // Alerts and validation messages
+                noFreeCodes: 'There are no free labels left for more factors.',
+                atLeastOne: 'The ANOVA model must have at least one factor.',
+                alertLabel: 'The label must have 1 to 8 letters or digits, start with a letter and not be "Residual".',
+                alertDupLabel: v => `The label ${v} is already used by another factor. Each factor needs a different label.`,
+                errLabel: c => `The label "${c}" is not valid: use 1 to 8 letters or digits, starting with a letter.`,
+                errResidualLabel: 'The label "Residual" is reserved. Use another one.',
+                errDupLabel: c => `Two factors share the label "${c}". Each factor needs a different label.`,
+                errLevels: name => `${name} must have at least 2 levels.`,
+                errFixedNested: name => `${name} is fixed and nested. In this methodology a nested factor is always random.`,
+                errMissingHost: name => `${name} is nested in a factor that does not exist. Check the relational structure.`,
+                errCycle: (a, b) => `Circular nesting between ${a} and ${b}. Check the relational structure.`,
+                errNoInteraction: (name, x, y, term) => `${name} is nested in ${x}×${y}, but that interaction does not exist because ${x} is nested in ${y}. It can be nested in ${term}.`,
+                // Model and df
+                modelDesc: (k, n) => `Model with ${k} ${k === 1 ? 'factor' : 'factors'} and n = ${n} ${n === 1 ? 'replicate' : 'replicates'} per cell.`,
+                warnDfSum: (s, tot) => ` Warning: the sum of df (${s}) does not match the total (${tot}).`,
+                warnN1: ' Warning: with n = 1 the residual has 0 df and σ²e cannot be estimated.',
+                typeFixed: 'FIXED',
+                typeRandom: 'RANDOM',
+                totalRow: 'Total ($N_{total}-1$)',
+                dfSumOk: '✓ df sum is correct',
+                dfSumBad: s => `✗ the df sum is ${s}`,
+                // Coefficient matrix
+                colFixed: '(Fixed)',
+                colRandom: '(Random)',
+                // Denominators
+                noTest: 'No test',
+                legendNoTest: n => `<strong>No test</strong> (no exact denominator): ${n} ${n === 1 ? 'source' : 'sources'}`,
+                legendDen: (k, n) => `Denominator <strong>$${k}$</strong>: ${n} ${n === 1 ? 'source' : 'sources'}`,
+                noExact: 'No exact test',
+                zeroDf: 'The denominator has 0 df: cannot be calculated',
+                // Optimization
+                optStrategy: 'Optimization strategy',
+                optKeyTest: (sym, isRes, den, formula) => `The key fixed test <strong>$${sym}$</strong> has as its denominator ${isRes ? 'the residual' : 'the random term'} <strong>$${den}$</strong>, with df: ${formula}.`,
+                optRecommendation: 'Methodological recommendation:',
+                optReplicates: nHelps => `Increasing the number of replicates ($n$) <strong>${nHelps ? 'DOES increase' : 'does NOT increase'} the power of $F$</strong> for the key test, because ${nHelps ? 'it increases the df of the Residual, which is the denominator' : '$n$ does not appear in the denominator df'}.`,
+                optFactorDesc: (name, code, sub, levels) => `${name} ($${code}$, subscript $${sub}$, ${levels} levels)`,
+                optIncreaseLevels: (names, plural) => `To optimize the design, <strong>increase the number of levels of ${names}</strong>, the random ${plural ? 'factors that appear' : 'factor that appears'} in the denominator df.`,
+                optFixedLevels: (names, plural) => `The levels of ${names} (fixed) also appear in the formula, but they are not changed just to optimize: they are scientific objectives.`,
+                optRuleTitle: 'Replicates rule ($n$)',
+                optRuleText: 'Increasing replicates ($n$) only increases the df of the <em>Residual</em>. If the denominator of the key $F$ is another random term, increasing $n$ does <strong>NOT</strong> increase the denominator df.',
+                optPowerTitle: 'Increasing statistical power',
+                optPowerRes: 'The denominator is the Residual: the main way to gain df is to increase the replicates ($n$).',
+                optPowerLevels: names => `To optimize the power of the key test, increase the levels of ${names}, which determine the denominator df.`,
+                optPowerFallback: 'the random factors in the denominator',
+                optNoTestTitle: 'Key test not feasible (No test)',
+                optNoTestText: sym => `The main fixed test $${sym}$ <strong>has no exact test</strong>. The design cannot be optimized without a valid estimator for the denominator. Use pseudo-$F$ construction methods (e.g. Satterthwaite's rule) or drop irrelevant factors to simplify the mean squares.`,
+                optNoFixed: 'There are no fixed factors in the current model to optimize the main interaction.'
+            },
+            es: {
+                // Interfaz estática
+                docTitle: 'ANOVA Multifactorial Ad-Hoc  - Metodología J. Zubcoff',
+                appTitle: 'ANOVA Multifactorial Ad-Hoc',
+                appSubtitle: 'Motor Algorítmico Riguroso - Modelo Mixto Restringido (Metodología J. Zubcoff)',
+                engineActive: 'Motor Algorítmico Activo',
+                factorDefinition: '1. Definición de Factores',
+                replicatesLbl: 'Réplicas ($n$):',
+                addFactor: 'Añadir Nuevo Factor',
+                examples: 'Diseños de Ejemplo (J. Zubcoff)',
+                case1Title: 'Caso 1: Ortogonal + Anidamiento Completo',
+                case1Desc: 'Protección (F), Región (F), Sitio anidado en P×R (A)',
+                case2Title: 'Caso 2: Ortogonal + Anidamiento Parcial',
+                case2Desc: 'Protección (F), Región (F), Sitio anidado en R (A)',
+                threeWayTitle: 'Trifactorial Ortogonal Fijo',
+                threeWayDesc: '3 Factores Fijos Ortogonales ($A \\times B \\times C$)',
+                tabModel: 'Modelo Lineal & GL',
+                tabCoef: 'Matriz CM ($E[MS]$)',
+                tabF: 'Test F & Denominadores',
+                tabOpt: 'Optimización',
+                formalModel: '2. Modelo Lineal Formal',
+                dfTitle: '3. Fuentes de Variación y Grados de Libertad (GL)',
+                thSource: 'Fuente de Variación',
+                thType: 'Tipo',
+                thDfFormula: 'Fórmula GL',
+                thDf: 'GL Calculado',
+                coefTitle: '4. Algoritmo de Coeficientes para Estimas de Cuadrados Medios ($E[MS]$)',
+                coefIntro: 'Matriz construida evaluando los subíndices de cada término según las reglas de factores fijos y aleatorios.',
+                rulesTitle: 'Reglas de asignación de coeficientes (Metodología J. Zubcoff):',
+                ruleFixed: '<strong>Subíndice FIJO:</strong> Si NO está en la fila $\\rightarrow$ su nivel ($p, r...$); si está ANIDADO (dentro de paréntesis) $\\rightarrow$ 1; si está en la fila sin anidar $\\rightarrow$ 0.',
+                ruleRandom: '<strong>Subíndice ALEATORIO:</strong> Si NO está en la fila $\\rightarrow$ su nivel ($s, n...$); si ESTÁ en la fila $\\rightarrow$ 1.',
+                emsTitle: 'Estimadores de Cuadrados Medios ($E[MS]$)',
+                emsAlign: 'Justificados a la izquierda según la metodología',
+                fTitle: '5. Determinación de Denominadores para la Razón $F$',
+                fIntro: 'Para contrastar cada efecto, se selecciona como denominador el Cuadrado Medio ($CM$) cuya expectativa matemática ($E[MS]$) sea idéntica a la del numerador, <strong>excepto por el término a contrastar</strong>. Si no existe un único denominador factible, se indica <strong>"No Test"</strong>.',
+                thEffect: 'Fuente de Variación (Efecto)',
+                thDenom: 'Denominador de $F$',
+                thFormal: 'Contraste Formal ($F_{calc}$)',
+                thDist: 'Distribución Bajo $H_0$',
+                optTitle: '6. Módulo de Optimización del Diseño Ad-Hoc',
+                optIntro: 'Estrategia metodológica para maximizar la potencia del test $F$ en los contrastes de mayor interés científico.',
+                featuresTitle: 'Características Principales de la Aplicación',
+                feature1: '<strong class="text-slate-200 block mb-1">1. Modelado Ad-Hoc Dinámico</strong> Configuración flexible de factores (fijos/aleatorios, ortogonales o anidados en múltiples combinaciones) y número de réplicas.',
+                feature2: '<strong class="text-slate-200 block mb-1">2. Sintaxis Matemática Limpia</strong> Generación formal de modelos lineales sin paréntesis redundantes en interacciones fijas (ej. $P \\times R$).',
+                feature3: '<strong class="text-slate-200 block mb-1">3. Algoritmo de Matriz E[MS]</strong> Estructura automatizada de estimas de cuadrados medios: algoritmo de Cornfield-Tukey bajo la asunción del Modelo Mixto Restringido.',
+                feature4: '<strong class="text-slate-200 block mb-1">4. Evaluación de Denominadores</strong> Comparación estricta de componentes de varianza en $E[MS]$ para encontrar denominadores exactos (o alertar "No Test").',
+                basedOn: 'Basado en la metodología de las diapositivas del Prof. Jose Jacobo Zubcoff',
+                department: 'Departamento de Ciencias del Mar y Biología Aplicada — Universidad de Alicante (UA)',
+                license: 'Licencia <strong>Creative Commons BY-SA 4.0</strong> / Copyleft Prof. Jose Jacobo Zubcoff',
+                // Tabla paso a paso de los estimadores de CM 
+                emsStepTitle: 'Cálculo paso a paso de los estimadores de CM',
+                emsStepIntro: 'Haz clic en una fila (o usa los botones) para ver cómo se obtiene su estimador de CM. Se empieza por el Residual y se sube por la tabla, de lo más fácil a lo más complejo. Las columnas en rojo y las filas en lila son las que se omiten.',
+                emsRulesTitle: 'Reglas para el cálculo de los estimadores de CM:',
+                emsRule1: 'Elegir la <strong>fila</strong> objetivo e identificar sus subíndices. Participan las <strong>filas</strong> que contienen todos esos subíndices (el resto se descarta) y las <strong>columnas</strong> que NO los contienen.',
+                emsRule2: 'En cada fila participante se multiplican los coeficientes visibles por la varianza de esa fila (σ², o Φ si es un término fijo).',
+                emsRule3: 'Se suman todas esas variabilidades. La varianza del residual es σ²<sub>e</sub>.',
+                btnStart: '▲ Empezar por el Residual',
+                btnPrev: '▼ Fila anterior',
+                btnNext: 'Fila siguiente ▲',
+                btnClear: 'Ver tabla completa',
+                stepOf: (k, m) => `Paso ${k} de ${m} · de abajo hacia arriba`,
+                selectHint: 'o haz clic en cualquier fila de la tabla.',
+                selectRowTitle: 'Usar esta fila como fila objetivo',
+                legendCols: 'Columnas omitidas (subíndices de la fila objetivo)',
+                legendRows: 'Filas que no contienen esos subíndices',
+                legendMark: 'Subíndices de la fila objetivo',
+                thEstimator: 'Estimador de los CM',
+                targetRow: 'Fila objetivo',
+                subsLbl: 'Subíndices',
+                colsLbl: 'Columnas',
+                colsUsed: list => `Participan: ${list}`,
+                colsNone: 'No queda ninguna columna: el coeficiente es 1',
+                rowsOmitted: 'Filas omitidas',
+                none: 'Ninguna',
+                noContribution: '= 0 → no aporta',
+                noCols: '(sin columnas)',
+                // Nombres de los factores de ejemplo
+                nameP: 'Protección', nameR: 'Región', nameS: 'Sitio',
+                // Tarjetas de factores
+                factorsCount: n => `${n} ${n === 1 ? 'Factor' : 'Factores'}`,
+                optOrthogonal: 'Ortogonal (Sin Anidar)',
+                optNestedIn: term => `Anidado en ${term}`,
+                optNestedInInteraction: term => `Anidado en Interacción (${term})`,
+                termInModel: term => `Término en el modelo: ${term}`,
+                fixedNoNest: 'Los factores fijos no pueden anidarse en esta metodología',
+                removeFactorTitle: 'Eliminar factor',
+                labelLbl: 'Etiqueta',
+                subscriptLbl: 'subíndice',
+                factorType: 'Tipo de Factor',
+                optFixed: 'Fijo (F)',
+                optRandom: 'Aleatorio (A)',
+                levelsLbl: 'Nº Niveles',
+                structureLbl: 'Estructura Relacional',
+                // Avisos y mensajes de validación
+                noFreeCodes: 'No quedan códigos libres para más factores.',
+                atLeastOne: 'El modelo ANOVA debe tener al menos un factor.',
+                alertLabel: 'La etiqueta debe tener de 1 a 8 letras o números, empezar por una letra y no ser «Residual».',
+                alertDupLabel: v => `La etiqueta ${v} ya la usa otro factor. Cada factor necesita una etiqueta distinta.`,
+                errLabel: c => `La etiqueta «${c}» no es válida: usa de 1 a 8 letras o números, empezando por una letra.`,
+                errResidualLabel: 'La etiqueta «Residual» está reservada. Usa otra.',
+                errDupLabel: c => `Hay dos factores con la etiqueta «${c}». Cada factor necesita una etiqueta distinta.`,
+                errLevels: name => `${name} debe tener al menos 2 niveles.`,
+                errFixedNested: name => `${name} es fijo y está anidado. En esta metodología un factor anidado es siempre aleatorio.`,
+                errMissingHost: name => `${name} está anidado en un factor que no existe. Revisa la estructura relacional.`,
+                errCycle: (a, b) => `Anidamiento circular entre ${a} y ${b}. Revisa la estructura relacional.`,
+                errNoInteraction: (name, x, y, term) => `${name} está anidado en ${x}×${y}, pero esa interacción no existe porque ${x} está anidado en ${y}. Puede anidarse en ${term}.`,
+                // Modelo y gl
+                modelDesc: (k, n) => `Modelo con ${k} factores y n = ${n} réplicas por celda.`,
+                warnDfSum: (s, tot) => ` Atención: la suma de GL (${s}) no coincide con el total (${tot}).`,
+                warnN1: ' Atención: con n = 1 el residual tiene 0 GL y no se puede estimar σ²e.',
+                typeFixed: 'FIJO',
+                typeRandom: 'ALEATORIO',
+                totalRow: 'Total ($N_{total}-1$)',
+                dfSumOk: '✓ suma de GL correcta',
+                dfSumBad: s => `✗ la suma de GL es ${s}`,
+                // Matriz de coeficientes
+                colFixed: '(Fijo)',
+                colRandom: '(Aleatorio)',
+                // Denominadores
+                noTest: 'No Test',
+                legendNoTest: n => `<strong>No Test</strong> (Sin Denominador Exacto): ${n} fuente(s)`,
+                legendDen: (k, n) => `Denominador <strong>$${k}$</strong>: ${n} fuente(s)`,
+                noExact: 'No Calculable Exacto',
+                zeroDf: 'El denominador tiene 0 GL: no se puede calcular',
+                // Optimización
+                optStrategy: 'Estrategia de Optimización Requerida',
+                optKeyTest: (sym, isRes, den, formula) => `El contraste clave fijo <strong>$${sym}$</strong> tiene como denominador ${isRes ? 'el residual' : 'el término aleatorio'} <strong>$${den}$</strong>, con GL: ${formula}.`,
+                optRecommendation: 'Recomendación Metodológica:',
+                optReplicates: nHelps => `Aumentar el número de réplicas ($n$) <strong>${nHelps ? 'SÍ aumenta' : 'NO aumenta'} la potencia de $F$</strong> para el contraste clave porque ${nHelps ? 'incrementa los GL del Residual, que es el denominador' : '$n$ no aparece en los GL del denominador'}.`,
+                optFactorDesc: (name, code, sub, levels) => `${name} ($${code}$, subíndice $${sub}$, ${levels} niveles)`,
+                optIncreaseLevels: (names, plural) => `Para optimizar el diseño, se debe <strong>aumentar el número de niveles de ${names}</strong>, factor${plural ? 'es' : ''} aleatorio${plural ? 's' : ''} que aparece${plural ? 'n' : ''} en los GL del denominador.`,
+                optFixedLevels: (names, plural) => `Los niveles de ${names} (fijo${plural ? 's' : ''}) también aparecen en la fórmula, pero no se cambian solo por optimizar: son objetivos científicos.`,
+                optRuleTitle: 'Regla de las Réplicas ($n$)',
+                optRuleText: 'Aumentar réplicas ($n$) sólo incrementa los GL del <em>Residual</em>. Si el denominador de la $F$ clave es otro término aleatorio, aumentar $n$ <strong>NO</strong> aumenta los GL del denominador.',
+                optPowerTitle: 'Aumento de Potencia Estadística',
+                optPowerRes: 'El denominador es el Residual: la vía principal para ganar GL es aumentar las réplicas ($n$).',
+                optPowerLevels: names => `Para optimizar la potencia del contraste clave, se deben aumentar los niveles de ${names}, que determinan los GL del denominador.`,
+                optPowerFallback: 'los factores aleatorios del denominador',
+                optNoTestTitle: 'Contraste Clave Inviable (No Test)',
+                optNoTestText: sym => `El contraste principal fijo $${sym}$ <strong>No tiene Test</strong> exacto. No es posible optimizar el diseño sin un estimador válido para el denominador. Deberá recurrir a métodos de construcción de pseudo-$F$ (ej. regla de Satterthwaite) u omitir factores irrelevantes para despejar los Cuadrados Medios.`,
+                optNoFixed: 'No hay factores fijos en el modelo actual para optimizar la interacción principal.'
+            }
+        };
+
+        // Current language (English by default; the choice is remembered in this browser)
+        let LANG = 'en';
+        try { const saved = localStorage.getItem('anova-adhoc-lang'); if (saved === 'en' || saved === 'es') LANG = saved; } catch (e) {}
+
+        // Text lookup: t('key') or t('key', arg1, arg2...)
+        function t(key, ...args) {
+            const v = (I18N[LANG] && I18N[LANG][key] !== undefined) ? I18N[LANG][key] : I18N.es[key];
+            return typeof v === 'function' ? v(...args) : v;
+        }
+
+        // Apply texts to the static interface
+        function applyStaticTexts() {
+            document.documentElement.lang = LANG;
+            document.title = t('docTitle');
+            document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+            ['en', 'es'].forEach(l => {
+                const b = document.getElementById('lang-' + l);
+                if (!b) return;
+                const on = l === LANG;
+                b.setAttribute('aria-pressed', on);
+                b.className = 'px-2.5 py-1 rounded-full font-semibold transition-colors ' + (on ? 'bg-brand-600 text-white' : 'text-slate-300 hover:bg-slate-700');
+            });
+        }
+
+        // Example factor names follow the language (only if the user has not renamed them)
+        const EXAMPLE_NAMES = { P: 'nameP', R: 'nameR', S: 'nameS' };
+        function translateExampleNames(fromLang, toLang) {
+            state.factors.forEach(f => {
+                const key = EXAMPLE_NAMES[f.code];
+                if (key && f.name === I18N[fromLang][key]) f.name = I18N[toLang][key];
+            });
+        }
+
+        // Switch language: only texts change; the design and the calculations stay the same
+        function setLang(lang) {
+            if (!I18N[lang] || lang === LANG) { applyStaticTexts(); return; }
+            const prev = LANG;
+            LANG = lang;
+            try { localStorage.setItem('anova-adhoc-lang', lang); } catch (e) {}
+            translateExampleNames(prev, lang);
+            applyStaticTexts();
+            renderFactorsUI();
+            recalculateAll();
+            lucide.createIcons();
+        }
+
+        // Step-by-step E[MS] table (beta): last calculation and selected target row
+        // (emsStep = position counted from the bottom: 0 = Residual; null = no row selected)
+        let lastCalc = null;
+        let emsStep = null;
+
+        // ===================== App State & Logic =====================
         // State Management
         const state = {
             replicas: 3,
@@ -403,15 +756,68 @@
             { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-800', badge: 'bg-cyan-100 text-cyan-800 border-cyan-300' }
         ];
 
-        const noTestPalette = { 
-            bg: 'bg-red-50', 
-            border: 'border-red-300', 
-            text: 'text-red-700', 
-            badge: 'bg-red-100 text-red-800 border-red-400' 
+        const noTestPalette = {
+            bg: 'bg-red-50',
+            border: 'border-red-300',
+            text: 'text-red-700',
+            badge: 'bg-red-100 text-red-800 border-red-400'
         };
+
+        // Etiqueta de un factor: de 1 a 8 caracteres (letras y números), empezando por una letra
+        const LABEL_RE = /^\p{L}[\p{L}\p{N}]{0,7}$/u;
+        // Etiqueta en LaTeX: una letra en cursiva matemática; varias letras como palabra en cursiva
+        const tx = code => code.length === 1 ? code : `\\textit{${code}}`;
+
+        // Subíndices de una sola letra para cada factor (n = réplicas y e = residual quedan reservadas).
+        // Se usa la primera letra libre de la etiqueta; si no hay ninguna, la siguiente libre del alfabeto.
+        function factorsWithSubindex(factors = state.factors) {
+            const used = new Set(['e', 'n']);
+            return factors.map((f, idx) => {
+                const fromLabel = [...String(f.code).toLowerCase()].filter(ch => /[a-z]/.test(ch));
+                let sub = fromLabel.find(ch => !used.has(ch));
+                if (!sub) sub = 'abcdfghijklmopqrstuvwxyz'.split('').find(ch => !used.has(ch));
+                used.add(sub);
+                return { ...f, idx, subindex: sub };
+            });
+        }
+
+        // Nombre jerárquico del término formado por unos factores: p. ej. ['A'] con A anidado en B → «A(B)»
+        function termLabelFor(factors, codes) {
+            const anc = ancestorsMap(factors);
+            const isAnc = (a, b) => anc[b] && anc[b].has(a);
+            const nest = list => {
+                if (!list.length) return '';
+                const low = list.filter(x => !list.some(y => y !== x && isAnc(x, y)));
+                if (!low.length) return list.join('×');
+                const rest = list.filter(x => !low.includes(x));
+                return low.join('×') + (rest.length ? `(${nest(rest)})` : '');
+            };
+            const inside = factors.map(f => f.code).filter(c => !codes.includes(c) && codes.some(m => anc[m] && anc[m].has(c)));
+            return codes.join('×') + (inside.length ? `(${nest(inside)})` : '');
+        }
+
+        // Reglas del anidamiento: sin ciclos, y solo se anida en términos que existen en el modelo.
+        // Con A anidado en B, no existe la interacción A×B, así que C(A×B) no es válido;
+        // sí lo son C(A(B)) —C anidado en A— y C×A(B) —C ortogonal—.
+        function nestingProblem(factors) {
+            const anc = ancestorsMap(factors);
+            for (const f of factors) {
+                for (const a of anc[f.code]) if (anc[a] && anc[a].has(f.code)) return t('errCycle', f.code, a);
+            }
+            for (const f of factors) {
+                if (f.nestedIn === 'none') continue;
+                const set = f.nestedIn.split('*');
+                for (const x of set) for (const y of set) {
+                    if (x !== y && anc[x] && anc[x].has(y)) return t('errNoInteraction', f.name, x, y, termLabelFor(factors, [x]));
+                }
+            }
+            return null;
+        }
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
+            translateExampleNames('es', LANG);
+            applyStaticTexts();
             renderFactorsUI();
             setupEventListeners();
             recalculateAll();
@@ -422,12 +828,15 @@
             document.getElementById('replicas-input').addEventListener('change', (e) => {
                 const val = parseInt(e.target.value) || 1;
                 state.replicas = Math.max(1, val);
+                e.target.value = state.replicas;
                 recalculateAll();
             });
 
             document.getElementById('add-factor-btn').addEventListener('click', () => {
                 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                let nextCode = letters.split('').find(l => !state.factors.map(f=>f.code).includes(l)) || 'X';
+                const usedCodes = state.factors.map(f => f.code.toLowerCase());
+                let nextCode = letters.split('').find(l => !usedCodes.includes(l.toLowerCase()));
+                if (!nextCode) { alert(t('noFreeCodes')); return; }
                 state.factors.push({
                     id: 'f_' + Date.now(),
                     name: `Factor ${nextCode}`,
@@ -445,6 +854,7 @@
             if (presets[key]) {
                 state.replicas = presets[key].replicas;
                 state.factors = JSON.parse(JSON.stringify(presets[key].factors));
+                translateExampleNames('es', LANG);
                 document.getElementById('replicas-input').value = state.replicas;
                 renderFactorsUI();
                 recalculateAll();
@@ -465,72 +875,131 @@
             return result.sort((a, b) => a.length - b.length);
         }
 
+        // Anidamiento transitivo: para cada código, el conjunto de factores en los que está anidado
+        // (directamente o a través de otro factor). Ej.: T en S y S en R → T está anidado en S y en R.
+        function ancestorsMap(factors = state.factors) {
+            const codes = new Set(factors.map(f => f.code));
+            const direct = {};
+            factors.forEach(f => {
+                direct[f.code] = f.nestedIn === 'none' ? [] : f.nestedIn.split('*').filter(c => c !== f.code && codes.has(c));
+            });
+            const anc = {};
+            factors.forEach(f => {
+                const seen = new Set();
+                const stack = [...direct[f.code]];
+                while (stack.length) {
+                    const c = stack.pop();
+                    if (c === f.code || seen.has(c)) continue;
+                    seen.add(c);
+                    stack.push(...(direct[c] || []));
+                }
+                anc[f.code] = seen;
+            });
+            return anc;
+        }
+
+        // Comprueba que el diseño cumple las reglas del método antes de calcular
+        function validateDesign() {
+            const codes = state.factors.map(f => f.code.toLowerCase());
+            const byCode = Object.fromEntries(state.factors.map(f => [f.code, f]));
+            for (const f of state.factors) {
+                if (!LABEL_RE.test(f.code)) return t('errLabel', f.code);
+                if (f.code.toLowerCase() === 'residual') return t('errResidualLabel');
+                if (codes.filter(c => c === f.code.toLowerCase()).length > 1) return t('errDupLabel', f.code);
+                if (!Number.isInteger(f.levels) || f.levels < 2) return t('errLevels', f.name);
+                if (f.type === 'fixed' && f.nestedIn !== 'none') return t('errFixedNested', f.name);
+                if (f.nestedIn !== 'none' && f.nestedIn.split('*').some(h => !byCode[h])) return t('errMissingHost', f.name);
+            }
+            return nestingProblem(state.factors);
+        }
+
+        function sameCodeSet(a, b) {
+            if (a === 'none' || b === 'none') return a === b;
+            const x = a.split('*').sort().join('*'), y = b.split('*').sort().join('*');
+            return x === y;
+        }
+
         function renderFactorsUI() {
             const container = document.getElementById('factors-container');
             container.innerHTML = '';
-            document.getElementById('factor-count-badge').innerText = `${state.factors.length} Factores`;
+            document.getElementById('factor-count-badge').innerText = t('factorsCount', state.factors.length);
+            const anc = ancestorsMap();
+            const subs = factorsWithSubindex();
 
             state.factors.forEach((factor) => {
                 const card = document.createElement('div');
                 card.className = 'p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-2 text-xs relative group';
 
                 // Potential Nesting Targets (ONLY si es Aleatorio)
-                let nestingOptionsHTML = `<option value="none">Ortogonal (Sin Anidar)</option>`;
+                let nestingOptionsHTML = `<option value="none">${t('optOrthogonal')}</option>`;
                 let selectDisabled = '';
-                
+
+                let nestNote = '';
                 if (factor.type === 'random') {
-                    const otherFactors = state.factors.filter(f => f.id !== factor.id);
-                    const allCombis = getAllCombinations(otherFactors);
-                    allCombis.forEach(combi => {
-                        const val = combi.map(f => f.code).join('*');
-                        const label = combi.length === 1 ? `Anidado en ${combi[0].code}` : `Anidado en Interacción (${val.replace(/\*/g,'×')})`;
-                        nestingOptionsHTML += `<option value="${val}" ${factor.nestedIn === val ? 'selected' : ''}>${label}</option>`;
+                    // Opciones: cualquier término que exista en el modelo formado por los demás factores,
+                    // también los anidados (p. ej. A(B)). Se descartan:
+                    //  - los factores anidados en este (crearían un ciclo);
+                    //  - las «interacciones» que no existen porque un factor está anidado en otro
+                    //    (con A(B) no hay A×B, así que no se ofrece «Anidado en A×B»);
+                    //  - las opciones que dejarían inválido el anidamiento de otro factor.
+                    const otherFactors = state.factors.filter(f => f.id !== factor.id && !(anc[f.code] && anc[f.code].has(factor.code)));
+                    getAllCombinations(otherFactors).forEach(combi => {
+                        const codesC = combi.map(f => f.code);
+                        const val = codesC.join('*');
+                        const sim = state.factors.map(f => f.id === factor.id ? { ...f, nestedIn: val } : f);
+                        if (nestingProblem(sim)) return;
+                        const term = termLabelFor(state.factors, codesC);
+                        const label = combi.length === 1 ? t('optNestedIn', term) : t('optNestedInInteraction', term);
+                        nestingOptionsHTML += `<option value="${val}" ${sameCodeSet(factor.nestedIn, val) ? 'selected' : ''}>${label}</option>`;
                     });
+                    if (factor.nestedIn !== 'none') nestNote = t('termInModel', termLabelFor(state.factors, [factor.code]));
                 } else {
-                    selectDisabled = 'disabled title="Los factores fijos no pueden anidarse en esta metodología"';
+                    selectDisabled = `disabled title="${t('fixedNoNest')}"`;
                     // Nos aseguramos que visualmente refleje 'none'
-                    factor.nestedIn = 'none'; 
+                    factor.nestedIn = 'none';
                 }
+                const sub = (subs.find(f => f.id === factor.id) || {}).subindex || '';
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between gap-2">
                         <input type="text" value="${factor.name}" onchange="updateFactor('${factor.id}', 'name', this.value)"
                             class="font-semibold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-white focus:outline-none px-1 py-0.5 rounded w-full">
-                        <button onclick="removeFactor('${factor.id}')" class="text-slate-400 hover:text-red-500 p-1" title="Eliminar factor">
+                        <button onclick="removeFactor('${factor.id}')" class="text-slate-400 hover:text-red-500 p-1" title="${t('removeFactorTitle')}">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-[10px] text-slate-500 font-medium block">Código / Subíndice</label>
-                            <input type="text" value="${factor.code}" onchange="updateFactor('${factor.id}', 'code', this.value.toUpperCase())"
-                                class="w-full px-2 py-1 bg-white border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:outline-none uppercase font-mono font-semibold">
+                            <label class="text-[10px] text-slate-500 font-medium block">${t('labelLbl')} <span class="text-slate-400">· ${t('subscriptLbl')} <em class="font-serif text-slate-600">${sub}</em></span></label>
+                            <input type="text" maxlength="8" value="${factor.code}" onchange="updateFactor('${factor.id}', 'code', this.value)"
+                                class="w-full px-2 py-1 bg-white border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:outline-none font-mono font-semibold">
                         </div>
                         <div>
-                            <label class="text-[10px] text-slate-500 font-medium block">Tipo de Factor</label>
+                            <label class="text-[10px] text-slate-500 font-medium block">${t('factorType')}</label>
                             <select onchange="updateFactor('${factor.id}', 'type', this.value)"
                                 class="w-full px-2 py-1 bg-white border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:outline-none">
-                                <option value="fixed" ${factor.type === 'fixed' ? 'selected' : ''}>Fijo (F)</option>
-                                <option value="random" ${factor.type === 'random' ? 'selected' : ''}>Aleatorio (A)</option>
+                                <option value="fixed" ${factor.type === 'fixed' ? 'selected' : ''}>${t('optFixed')}</option>
+                                <option value="random" ${factor.type === 'random' ? 'selected' : ''}>${t('optRandom')}</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-[10px] text-slate-500 font-medium block">Nº Niveles</label>
+                            <label class="text-[10px] text-slate-500 font-medium block">${t('levelsLbl')}</label>
                             <input type="number" min="2" value="${factor.levels}" onchange="updateFactor('${factor.id}', 'levels', parseInt(this.value) || 2)"
                                 class="w-full px-2 py-1 bg-white border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:outline-none font-semibold">
                         </div>
                         <div>
-                            <label class="text-[10px] text-slate-500 font-medium block">Estructura Relacional</label>
+                            <label class="text-[10px] text-slate-500 font-medium block">${t('structureLbl')}</label>
                             <select onchange="updateFactor('${factor.id}', 'nestedIn', this.value)" ${selectDisabled}
                                 class="w-full px-2 py-1 bg-white border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:outline-none disabled:bg-slate-100 disabled:text-slate-400">
                                 ${nestingOptionsHTML}
                             </select>
                         </div>
                     </div>
+                    ${nestNote ? `<p class="text-[10px] text-slate-500">${nestNote}</p>` : ''}
                 `;
                 container.appendChild(card);
             });
@@ -541,9 +1010,28 @@
             const factor = state.factors.find(f => f.id === id);
             if (factor) {
                 const oldCode = factor.code;
+
+                // Validación de la etiqueta: de 1 a 8 letras o números, única y distinta de «Residual»
+                if (key === 'code') {
+                    value = String(value).trim();
+                    if (value === oldCode) return;
+                    if (!LABEL_RE.test(value) || value.toLowerCase() === 'residual') {
+                        alert(t('alertLabel'));
+                        renderFactorsUI();
+                        return;
+                    }
+                    if (state.factors.some(f => f.id !== id && f.code.toLowerCase() === value.toLowerCase())) {
+                        alert(t('alertDupLabel', value));
+                        renderFactorsUI();
+                        return;
+                    }
+                }
+                // Validación de niveles: entero ≥ 2
+                if (key === 'levels') value = Math.max(2, Math.round(value) || 2);
+
                 factor[key] = value;
-                
-                // Si cambiamos un código (ej. P a Q), tenemos que actualizar automáticamente 
+
+                // Si cambiamos un código (ej. P a Q), tenemos que actualizar automáticamente
                 // los "nestedIn" de los factores que estuvieran anidados en él.
                 if (key === 'code') {
                     state.factors.forEach(otherFactor => {
@@ -559,8 +1047,8 @@
                 if (key === 'type' && value === 'fixed') {
                     factor.nestedIn = 'none';
                 }
-                
-                // Forzamos el renderizado de la UI para que los desplegables de anidamiento 
+
+                // Forzamos el renderizado de la UI para que los desplegables de anidamiento
                 // reflejen los bloqueos (si es fijo) y los nuevos códigos/nombres.
                 renderFactorsUI();
                 recalculateAll();
@@ -569,136 +1057,139 @@
 
         function removeFactor(id) {
             if (state.factors.length <= 1) {
-                alert('El modelo ANOVA debe tener al menos un factor.');
+                alert(t('atLeastOne'));
                 return;
             }
+            const removed = state.factors.find(f => f.id === id);
             state.factors = state.factors.filter(f => f.id !== id);
-            
-            // Si borramos un factor, limpiamos los anidamientos que dependían de él
+
+            // Se quita el factor borrado de los anidamientos que lo incluían (se conservan los demás)
             state.factors.forEach(f => {
                 if (f.nestedIn !== 'none') {
-                    const deps = f.nestedIn.split('*');
-                    const factorBorrado = !state.factors.some(x => deps.includes(x.code));
-                    if (factorBorrado) f.nestedIn = 'none';
+                    const deps = f.nestedIn.split('*').filter(c => c !== removed.code);
+                    f.nestedIn = deps.length ? deps.join('*') : 'none';
                 }
             });
-            
+
             renderFactorsUI();
             recalculateAll();
         }
 
         // --- CORE ENGINE ---
 
-        function getFixedSizeCombinations(arr, k) {
-            if (k === 1) return arr.map(e => [e]);
-            const res = [];
-            for (let i = 0; i < arr.length; i++) {
-                getFixedSizeCombinations(arr.slice(i + 1), k - 1).forEach(tail => res.push([arr[i], ...tail]));
-            }
-            return res;
-        }
-
         function generateANOVAStructure() {
+            const factors = factorsWithSubindex();
+            const anc = ancestorsMap();
+            const isAnc = (a, b) => anc[b.code].has(a.code); // b está anidado en a
+
+            // Notación jerárquica: primero los factores más internos y, entre paréntesis, los que los contienen
+            const nestStr = (list, kind) => {
+                if (!list.length) return '';
+                const low = list.filter(x => !list.some(y => y !== x && isAnc(x, y)));
+                const rest = list.filter(x => !low.includes(x));
+                const sep = kind === 'sub' ? '' : (kind === 'tex' ? '\\times ' : '×');
+                const s = low.map(x => kind === 'sub' ? x.subindex : (kind === 'tex' ? tx(x.code) : x.code)).join(sep);
+                return rest.length ? `${s}(${nestStr(rest, kind)})` : s;
+            };
+
+            // Todas las combinaciones de factores (orden de Yates). Se descartan las que cruzan un factor
+            // con otro en el que está anidado (directa o indirectamente).
+            const subsets = [];
+            factors.forEach(f => { const prev = subsets.slice(); subsets.push([f]); prev.forEach(s => subsets.push([...s, f])); });
+
             const terms = [];
-            const factors = state.factors.map(f => ({ ...f, subindex: f.code.toLowerCase() }));
-
-            // 1. Main Effects & Nested Factors
-            factors.forEach(f => {
-                const inside = f.nestedIn === 'none' ? [] : f.nestedIn.split('*').map(c => c.toLowerCase());
-                const label = f.nestedIn === 'none' ? f.code : `${f.code}(${f.nestedIn.replace(/\*/g,'×')})`;
-                const sym = f.nestedIn === 'none' 
-                    ? `${f.code}_{${f.subindex}}` 
-                    : `${f.code}(${f.nestedIn.replace(/\*/g,'\\times ')})_{${f.subindex}(${inside.join('')})}`;
-                
-                terms.push({ label, symbol: sym, type: f.type, outside: [f.subindex], inside: inside, isRes: false });
+            subsets.forEach((combi, order) => {
+                if (combi.some(a => combi.some(b => a !== b && isAnc(a, b)))) return;
+                const insideF = factors.filter(f => !combi.includes(f) && combi.some(c => anc[c.code].has(f.code)));
+                const outArr = combi.map(f => f.subindex);
+                const inArr = insideF.map(f => f.subindex);
+                const label = combi.map(f => f.code).join('×') + (insideF.length ? `(${nestStr(insideF, 'lbl')})` : '');
+                const head = combi.map(f => tx(f.code)).join('\\times ') + (insideF.length ? `(${nestStr(insideF, 'tex')})` : '');
+                const sub = outArr.join('') + (insideF.length ? `(${nestStr(insideF, 'sub')})` : '');
+                const type = combi.every(f => f.type === 'fixed') ? 'fixed' : 'random';
+                terms.push({ label, texLabel: head, symbol: `${head}_{${sub}}`, sub, type, outside: outArr, inside: inArr, isRes: false,
+                    size: outArr.length + inArr.length, maxIdx: Math.max(...combi.map(f => f.idx)), order });
             });
-
-            // 2. Interactions (Crossed)
-            for (let k = 2; k <= factors.length; k++) {
-                getFixedSizeCombinations(factors, k).forEach(combi => {
-                    const outArr = combi.map(f => f.subindex);
-                    let inArr = [];
-                    combi.forEach(f => {
-                        if(f.nestedIn !== 'none') f.nestedIn.split('*').forEach(c => {
-                            if(!inArr.includes(c.toLowerCase())) inArr.push(c.toLowerCase());
-                        });
-                    });
-                    
-                    // In ANOVA, a factor cannot be crossed with a factor it is nested within.
-                    let isValid = true;
-                    inArr.forEach(i => { if (outArr.includes(i)) isValid = false; });
-
-                    if (isValid) {
-                        const type = combi.every(f => f.type === 'fixed') ? 'fixed' : 'random';
-                        const codes = combi.map(f => f.nestedIn==='none' ? f.code : `${f.code}(${f.nestedIn.replace(/\*/g,'×')})`).join('×');
-                        const sym = combi.map(f => f.nestedIn==='none' ? f.code : `${f.code}(${f.nestedIn.replace(/\*/g,'\\times ')})`).join('\\times ');
-                        const inStr = inArr.length ? `(${inArr.join('')})` : '';
-                        
-                        terms.push({ label: codes, symbol: `${sym}_{${outArr.join('')}${inStr}}`, type, outside: outArr, inside: inArr, isRes: false });
-                    }
-                });
-            }
+            // Orden de las diapositivas: por nº de subíndices y, a igualdad, según el orden de entrada de los factores
+            terms.sort((a, b) => a.size - b.size || a.maxIdx - b.maxIdx || a.order - b.order);
 
             // 3. Residual
             const allOut = factors.map(f => f.subindex);
-            terms.push({ label: 'Residual', symbol: `e_{n(${allOut.join('')})}`, type: 'random', outside: ['n'], inside: allOut, isRes: true });
+            terms.push({ label: 'Residual', texLabel: '\\text{Residual}', symbol: `e_{n(${allOut.join('')})}`, sub: `n(${allOut.join('')})`, type: 'random', outside: ['n'], inside: allOut, isRes: true });
 
             return terms;
         }
 
+        function clearOutputs(message) {
+            lastCalc = null;
+            document.getElementById('linear-model-latex').innerHTML = '';
+            document.getElementById('model-description').innerText = message;
+            ['anova-df-tbody', 'ems-steps', 'ems-formulas-list', 'denominator-group-legend', 'fratio-tbody'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+            document.getElementById('dynamic-optimization-content').innerHTML =
+                `<div class="p-4 bg-red-50 text-red-800 rounded-lg border border-red-200 text-sm">${message}</div>`;
+        }
+
         function recalculateAll() {
+            const problem = validateDesign();
+            if (problem) { clearOutputs(problem); return; }
+
             const terms = generateANOVAStructure();
-            const factors = state.factors.map(f => ({ ...f, subindex: f.code.toLowerCase() }));
-            
-            // 1. GL Computation 
+            const factors = factorsWithSubindex();
+
+            // 1. GL Computation
             let glTotal = (factors.reduce((acc, f) => acc * f.levels, 1) * state.replicas) - 1;
             terms.forEach(t => {
                 let df = 1, pParts = [], vParts = [];
-                
+
                 if (t.isRes) {
-                    df = state.replicas - 1; 
-                    pParts.push('(n-1)'); 
+                    df = state.replicas - 1;
+                    pParts.push('(n-1)');
                     vParts.push(`${state.replicas - 1}`);
                     t.inside.forEach(s => {
                         const f = factors.find(x => x.subindex === s);
-                        df *= f.levels; 
-                        pParts.push(s); 
+                        df *= f.levels;
+                        pParts.push(s);
                         vParts.push(f.levels);
                     });
                 } else {
                     t.outside.forEach(s => {
                         const f = factors.find(x => x.subindex === s);
-                        df *= (f.levels - 1); 
-                        pParts.push(`(${s}-1)`); 
+                        df *= (f.levels - 1);
+                        pParts.push(`(${s}-1)`);
                         vParts.push(`${f.levels - 1}`);
                     });
                     t.inside.forEach(s => {
                         const f = factors.find(x => x.subindex === s);
-                        df *= f.levels; 
-                        pParts.push(s); 
+                        df *= f.levels;
+                        pParts.push(s);
                         vParts.push(f.levels);
                     });
                 }
                 t.gl = df;
                 t.glFormula = `$${pParts.join('\\times ')} = ${vParts.join('\\times ')}$`;
             });
+            const glSum = terms.reduce((acc, t) => acc + t.gl, 0);
 
             // Model Render
             const subStr = factors.map(f => f.subindex).join('');
             let eq = `X_{${subStr}n} = \\mu ` + terms.map(t => ` + ${t.symbol}`).join('');
             document.getElementById('linear-model-latex').innerHTML = `$$${eq}$$`;
-            let desc = `Modelo con ${factors.length} factores y $n=${state.replicas}$ réplicas por celda.`;
+            let desc = t('modelDesc', factors.length, state.replicas);
+            if (glSum !== glTotal) desc += t('warnDfSum', glSum, glTotal);
+            if (state.replicas < 2) desc += t('warnN1');
             document.getElementById('model-description').innerText = desc;
 
             // GL Table Render
-            document.getElementById('anova-df-tbody').innerHTML = terms.map(t => `
+            document.getElementById('anova-df-tbody').innerHTML = terms.map(term => `
                 <tr class="border-b border-slate-100 hover:bg-slate-50">
-                    <td class="p-2.5 font-medium text-slate-800">$${t.symbol}$</td>
-                    <td class="p-2.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${t.type === 'fixed' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800'}">${t.type.toUpperCase()}</span></td>
-                    <td class="p-2.5 text-slate-600">${t.glFormula}</td>
-                    <td class="p-2.5 text-right font-bold font-mono text-slate-800">${t.gl}</td>
+                    <td class="p-2.5 font-medium text-slate-800">$${term.symbol}$</td>
+                    <td class="p-2.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${term.type === 'fixed' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800'}">${term.type === 'fixed' ? t('typeFixed') : t('typeRandom')}</span></td>
+                    <td class="p-2.5 text-slate-600">${term.glFormula}</td>
+                    <td class="p-2.5 text-right font-bold font-mono text-slate-800">${term.gl}</td>
                 </tr>
-            `).join('') + `<tr class="bg-slate-50 font-bold border-t border-slate-200"><td class="p-2.5 text-slate-800" colspan="3">Total ($N_{total}-1$)</td><td class="p-2.5 text-right font-mono text-brand-600">${glTotal}</td></tr>`;
+            `).join('') + `<tr class="bg-slate-50 font-bold border-t border-slate-200"><td class="p-2.5 text-slate-800" colspan="3">${t('totalRow')}${glSum === glTotal ? ` <span class="text-emerald-600 font-normal text-[11px]">${t('dfSumOk')}</span>` : ` <span class="text-red-600 font-normal text-[11px]">${t('dfSumBad', glSum)}</span>`}</td><td class="p-2.5 text-right font-mono text-brand-600">${glTotal}</td></tr>`;
 
             // 2. Coefficient Matrix (Restricted Mixed Model rules)
             const cols = [...factors, {subindex: 'n', type: 'random'}];
@@ -712,39 +1203,38 @@
                 });
             });
 
-            // Matrix Render
-            document.getElementById('matrix-thead').innerHTML = `<tr class="bg-slate-100 border-b border-slate-200"><th class="p-2 text-left font-semibold">Fuente de Variación</th>` + cols.map(c => `<th class="p-2 font-mono font-bold">${c.subindex} <span class="text-[10px] font-normal text-slate-500 block">(${c.type === 'fixed' ? 'Fijo' : 'Aleatorio'})</span></th>`).join('') + `</tr>`;
-            document.getElementById('matrix-tbody').innerHTML = terms.map(t => `
-                <tr class="border-b border-slate-100 hover:bg-slate-50">
-                    <td class="p-2 text-left font-medium">$${t.symbol}$</td>
-                    ${cols.map(c => `<td class="p-2 font-mono ${t.coeffs[c.subindex] === '0' ? 'text-slate-300' : 'font-bold text-slate-800'}">${t.coeffs[c.subindex]}</td>`).join('')}
-                </tr>
-            `).join('');
+            // Matrix Render: shown in the step-by-step table (renderEmsSteps), after the E[MS] are assembled
 
             // 3. E[MS] Assembly (Strict: 0s annihilate variance components)
             terms.forEach(target => {
                 const tSubs = [...target.outside, ...target.inside];
                 target.emsComps = []; // Keep references for F-test matching
-                
+                target.emsSteps = []; // Display only (beta): participating rows and their visible coefficients
+
                 terms.forEach(row => {
                     const rSubs = [...row.outside, ...row.inside];
-                    // Subscript rule: row must contain all target's subscripts to be a candidate
+                    // Filas: participan las que contienen todos los subíndices de la fila objetivo
                     if (tSubs.every(s => rSubs.includes(s))) {
                         let mult = 1, multStr = '';
+                        const cells = [];
                         cols.forEach(c => {
-                            if (!target.outside.includes(c.subindex)) {
+                            // Columnas: participan las que NO contienen ninguno de los subíndices de la fila objetivo
+                            // (tanto los de fuera como los de dentro del paréntesis)
+                            if (!tSubs.includes(c.subindex)) {
                                 const val = row.coeffs[c.subindex];
+                                cells.push(val);
                                 if (val === '0') mult = 0;
                                 else if (val !== '1') multStr += val;
                             }
                         });
-                        
+
                         if (mult !== 0) {
-                            const vsym = row.isRes 
-                                ? '\\sigma^{2}_{e}' 
-                                : (row.type==='fixed' ? `\\Phi_{${row.outside.join('')}}` : `\\sigma^{2}_{${row.outside.join('')}${row.inside.length? '('+row.inside.join('')+')':''}}`);
+                            const vsym = row.isRes
+                                ? '\\sigma^{2}_{e}'
+                                : (row.type==='fixed' ? `\\Phi_{${row.sub}}` : `\\sigma^{2}_{${row.sub}}`);
                             target.emsComps.push({ ref: row, tex: `${multStr}${vsym}` });
                         }
+                        target.emsSteps.push({ row, cells, zero: mult === 0, tex: mult !== 0 ? target.emsComps[target.emsComps.length - 1].tex : '' });
                     }
                 });
                 target.emsLaTeX = target.emsComps.map(c => c.tex).reverse().join(' + ');
@@ -753,7 +1243,7 @@
             // E[MS] Render
             document.getElementById('ems-formulas-list').innerHTML = terms.map(t => `
                 <div class="p-3 bg-white border border-slate-200 rounded-lg flex flex-col sm:flex-row sm:items-center gap-2 text-left text-xs">
-                    <div class="font-bold text-slate-800 min-w-[140px] text-left">$E[MS_{${t.label}}]$:</div>
+                    <div class="font-bold text-slate-800 min-w-[140px] text-left">$E[MS_{${t.texLabel}}]$:</div>
                     <div class="font-mono text-brand-800 text-sm ems-left-align flex-1 text-left">$${t.emsLaTeX}$</div>
                 </div>
             `).join('');
@@ -762,17 +1252,16 @@
             const denomMap = new Map();
             terms.forEach(t => {
                 if (t.isRes) return;
-                
-                // For a valid test, the denom's EMS components must be exactly the num's components MINUS the term itself.
-                const expDenomLabels = t.emsComps.map(c => c.ref.label).filter(l => l !== t.label).sort();
-                
+
+                // El denominador debe tener exactamente los mismos componentes que el numerador, salvo el propio término
+                const expDenom = t.emsComps.map(c => c.ref).filter(r => r !== t);
+
                 let denom = terms.find(cand => {
-                    if (cand === t || cand.type === 'fixed' || !cand.emsComps) return false;
-                    const candLabels = cand.emsComps.map(c => c.ref.label).sort();
-                    if (candLabels.length !== expDenomLabels.length) return false;
-                    return candLabels.every((val, i) => val === expDenomLabels[i]);
+                    if (cand === t || !cand.emsComps) return false;
+                    if (cand.emsComps.length !== expDenom.length) return false;
+                    return cand.emsComps.every(c => expDenom.includes(c.ref));
                 });
-                
+
                 t.denomRef = denom || null;
                 const dKey = denom ? denom.label : 'No Test';
                 if (!denomMap.has(dKey)) denomMap.set(dKey, []);
@@ -781,31 +1270,33 @@
 
             const cmap = {}; let cidx = 0;
             let legendHTML = '';
-            
+
             if (denomMap.has('No Test')) {
                 cmap['No Test'] = noTestPalette;
-                legendHTML += `<div class="px-2.5 py-1 rounded-full border text-[11px] font-medium flex items-center gap-1.5 ${noTestPalette.badge}"><span class="w-2 h-2 rounded-full bg-current"></span><span><strong>No Test</strong> (Sin Denominador Exacto): ${denomMap.get('No Test').length} fuente(s)</span></div>`;
+                legendHTML += `<div class="px-2.5 py-1 rounded-full border text-[11px] font-medium flex items-center gap-1.5 ${noTestPalette.badge}"><span class="w-2 h-2 rounded-full bg-current"></span><span>${t('legendNoTest', denomMap.get('No Test').length)}</span></div>`;
             }
-            
+
             denomMap.forEach((g, k) => {
                 if (k === 'No Test') return;
                 const p = denominatorColorPalette[cidx % denominatorColorPalette.length];
                 cmap[k] = p; cidx++;
-                legendHTML += `<div class="px-2.5 py-1 rounded-full border text-[11px] font-medium flex items-center gap-1.5 ${p.badge}"><span class="w-2 h-2 rounded-full bg-current"></span><span>Denominador <strong>$${k}$</strong>: ${g.length} fuente(s)</span></div>`;
+                const kTex = (terms.find(term => term.label === k) || {}).texLabel || k;
+                legendHTML += `<div class="px-2.5 py-1 rounded-full border text-[11px] font-medium flex items-center gap-1.5 ${p.badge}"><span class="w-2 h-2 rounded-full bg-current"></span><span>${t('legendDen', kTex, g.length)}</span></div>`;
             });
-            
+
             document.getElementById('denominator-group-legend').innerHTML = legendHTML;
 
             // F-Ratio Table Render
-            document.getElementById('fratio-tbody').innerHTML = terms.filter(t => !t.isRes).map(t => {
-                const dk = t.denomRef ? t.denomRef.label : 'No Test';
+            document.getElementById('fratio-tbody').innerHTML = terms.filter(term => !term.isRes).map(term => {
+                const dk = term.denomRef ? term.denomRef.label : 'No Test';
                 const p = cmap[dk];
+                const zeroDf = term.denomRef && term.denomRef.gl === 0;
                 return `
                     <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors ${p.bg}">
-                        <td class="p-2.5 font-medium text-slate-800 border-l-4 ${p.border.replace('border-','border-l-')}">$${t.symbol}$</td>
-                        <td class="p-2.5"><span class="px-2 py-0.5 rounded border text-[11px] font-bold ${p.badge}">${t.denomRef ? `$${t.denomRef.symbol}$` : 'No Test'}</span></td>
-                        <td class="p-2.5 font-mono font-bold ${p.text} ${t.denomRef ? '' : 'text-[11px]'}">${t.denomRef ? `$F = \\frac{MS_{${t.label}}}{MS_{${t.denomRef.label}}}$` : 'No Calculable Exacto'}</td>
-                        <td class="p-2.5 text-slate-600 font-mono text-[11px]">${t.denomRef ? `$F_{${t.gl}, ${t.denomRef.gl}}$` : '-'}</td>
+                        <td class="p-2.5 font-medium text-slate-800 border-l-4 ${p.border.replace('border-','border-l-')}">$${term.symbol}$</td>
+                        <td class="p-2.5"><span class="px-2 py-0.5 rounded border text-[11px] font-bold ${p.badge}">${term.denomRef ? `$${term.denomRef.symbol}$` : t('noTest')}</span></td>
+                        <td class="p-2.5 font-mono font-bold ${p.text} ${term.denomRef ? '' : 'text-[11px]'}">${term.denomRef ? `$F = \\frac{MS_{${term.texLabel}}}{MS_{${term.denomRef.texLabel}}}$` : t('noExact')}${zeroDf ? `<span class="block text-[11px] text-red-600 font-sans font-normal">${t('zeroDf')}</span>` : ''}</td>
+                        <td class="p-2.5 text-slate-600 font-mono text-[11px]">${term.denomRef ? `$F_{${term.gl}, ${term.denomRef.gl}}$` : '-'}</td>
                     </tr>
                 `;
             }).join('');
@@ -820,22 +1311,28 @@
             let optHTML = '';
             if (keyTerm && keyTerm.denomRef) {
                 const denom = keyTerm.denomRef;
-                const isDenomRandomFactor = !denom.isRes;
+                // Parámetros que aparecen en los GL del denominador
+                const denSubs = [...denom.outside, ...denom.inside];
+                const randomLevers = factors.filter(f => f.type === 'random' && denSubs.includes(f.subindex));
+                const fixedInDen = factors.filter(f => f.type === 'fixed' && denSubs.includes(f.subindex));
+                const nHelps = denom.isRes;
+                const names = list => list.map(f => t('optFactorDesc', f.name, tx(f.code), f.subindex, f.levels)).join(', ');
 
                 optHTML = `
                     <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-6">
                         <h3 class="text-amber-800 font-bold text-base mb-3 flex items-center gap-2">
-                            <i data-lucide="triangle-alert" class="w-5 h-5"></i> Estrategia de Optimización Requerida
+                            <i data-lucide="triangle-alert" class="w-5 h-5"></i> ${t('optStrategy')}
                         </h3>
                         <p class="text-sm text-amber-900 mb-4">
-                            El contraste clave fijo <strong>$${keyTerm.symbol}$</strong> tiene como denominador el factor ${denom.isRes ? 'residual' : 'aleatorio'} <strong>$${denom.symbol}$</strong> ($GL = ${denom.gl}$).
+                            ${t('optKeyTest', keyTerm.symbol, denom.isRes, denom.symbol, denom.glFormula)}
                         </p>
-                        
+
                         <div class="text-amber-900 text-sm">
-                            <p class="font-bold mb-2">Recomendación Metodológica:</p>
+                            <p class="font-bold mb-2">${t('optRecommendation')}</p>
                             <ul class="list-disc list-inside space-y-2 ml-1">
-                                <li>Aumentar el número de réplicas ($n$) <strong>${isDenomRandomFactor ? 'NO aumenta' : 'SÍ aumenta'} la potencia de $F$</strong> para la interacción principal porque ${isDenomRandomFactor ? 'no altera los GL del denominador' : 'incrementa los GL del Residual'}.</li>
-                                ${isDenomRandomFactor ? `<li>Para optimizar el diseño, se debe <strong>aumentar el número de niveles del factor aleatorio ($${denom.label}$)</strong> para elevar los GL del denominador.</li>` : ''}
+                                <li>${t('optReplicates', nHelps)}</li>
+                                ${randomLevers.length ? `<li>${t('optIncreaseLevels', names(randomLevers), randomLevers.length > 1)}</li>` : ''}
+                                ${fixedInDen.length ? `<li>${t('optFixedLevels', fixedInDen.map(f => f.name).join(', '), fixedInDen.length > 1)}</li>` : ''}
                             </ul>
                         </div>
                     </div>
@@ -843,18 +1340,20 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
                             <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> Regla de las Réplicas ($n$)
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> ${t('optRuleTitle')}
                             </h4>
                             <p class="text-sm text-slate-600">
-                                Aumentar réplicas ($n$) sólo incrementa los GL del <em>Residual</em>. Si el denominador de la $F$ clave es un factor aleatorio (ej: Sitio), aumentar $n$ <strong>NO</strong> aumenta los GL del denominador.
+                                ${t('optRuleText')}
                             </p>
                         </div>
                         <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
                             <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2 text-sm">
-                                <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i> Aumento de Potencia Estadística
+                                <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i> ${t('optPowerTitle')}
                             </h4>
                             <p class="text-sm text-slate-600">
-                                Para optimizar la potencia de la interacción fija principal, se deben aumentar los niveles del factor aleatorio anidado que actúa como denominador.
+                                ${nHelps
+                                    ? t('optPowerRes')
+                                    : t('optPowerLevels', randomLevers.map(f => f.name).join(', ') || t('optPowerFallback'))}
                             </p>
                         </div>
                     </div>
@@ -864,20 +1363,138 @@
                     <div class="p-4 bg-red-50 text-red-800 rounded-lg border border-red-200 text-sm flex items-start gap-3">
                         <i data-lucide="x-octagon" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
                         <div>
-                            <strong>Contraste Clave Inviable (No Test)</strong><br>
-                            El contraste principal fijo $${keyTerm.symbol}$ <strong>No tiene Test</strong> exacto. No es posible optimizar el diseño sin un estimador válido para el denominador. Deberá recurrir a métodos de construcción de pseudo-$F$ (ej. regla de Satterthwaite) u omitir factores irrelevantes para despejar los Cuadrados Medios.
+                            <strong>${t('optNoTestTitle')}</strong><br>
+                            ${t('optNoTestText', keyTerm.symbol)}
                         </div>
                     </div>`;
             } else {
-                optHTML = `<div class="p-4 bg-slate-100 text-slate-600 rounded-lg text-sm">No hay factores fijos en el modelo actual para optimizar la interacción principal.</div>`;
+                optHTML = `<div class="p-4 bg-slate-100 text-slate-600 rounded-lg text-sm">${t('optNoFixed')}</div>`;
             }
 
             document.getElementById('dynamic-optimization-content').innerHTML = optHTML;
+
+            // Step-by-step E[MS] table (beta)
+            if (lastCalc && lastCalc.terms.length !== terms.length) emsStep = null;
+            lastCalc = { terms, cols };
+            renderEmsSteps(false);
 
             // Typeset MathJax
             if (window.MathJax && MathJax.typesetPromise) {
                 MathJax.typesetPromise();
             }
+        }
+
+        // ===================== Step-by-step E[MS] table (beta) =====================
+        // Display only: for the selected target row it shades the omitted columns (red) and rows (lavender),
+        // marks the target subscripts and lists the product of visible coefficients of each participating row.
+        // It uses the values already calculated in recalculateAll(); it does not calculate anything new.
+        function emsLabelHTML(term, hl) {
+            const sub = [...term.sub].map(ch => (hl && hl.has(ch)) ? `<mark class="bg-yellow-200 text-slate-900 rounded px-0.5">${ch}</mark>` : ch).join('');
+            return `<span class="font-serif ${term.isRes ? '' : 'italic'} text-[13px]">${term.label}</span><sub class="font-serif italic text-[10px]">${sub}</sub>`;
+        }
+
+        function renderEmsSteps(typeset = true) {
+            const box = document.getElementById('ems-steps');
+            if (!box) return;
+            if (!lastCalc) { box.innerHTML = ''; return; }
+            const { terms, cols } = lastCalc;
+            const M = terms.length;
+            if (emsStep !== null) emsStep = Math.min(Math.max(emsStep, 0), M - 1);
+            const ti = emsStep === null ? -1 : M - 1 - emsStep;
+            const target = ti >= 0 ? terms[ti] : null;
+            const tSubs = target ? [...target.outside, ...target.inside] : [];
+            const hl = new Set(tSubs);
+            const participating = new Set(target ? target.emsSteps.map(st => st.row) : []);
+            const omitCol = c => !!target && tSubs.includes(c.subindex);
+            const omitRow = row => !!target && !participating.has(row);
+            const btn = 'px-3 py-1.5 rounded-lg font-semibold disabled:opacity-40 disabled:cursor-default';
+
+            // Controls
+            const controls = !target
+                ? `<button type="button" onclick="stepEms(1)" class="${btn} bg-brand-600 text-white hover:bg-brand-700">${t('btnStart')}</button>
+                   <span class="text-slate-500">${t('selectHint')}</span>`
+                : `<button type="button" onclick="stepEms(-1)" ${emsStep === 0 ? 'disabled' : ''} class="${btn} border border-slate-300 bg-white hover:bg-slate-50">${t('btnPrev')}</button>
+                   <button type="button" onclick="stepEms(1)" ${emsStep === M - 1 ? 'disabled' : ''} class="${btn} bg-brand-600 text-white hover:bg-brand-700">${t('btnNext')}</button>
+                   <span class="text-slate-500">${t('stepOf', emsStep + 1, M)}</span>
+                   <button type="button" onclick="clearEmsStep()" class="ml-auto px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50">${t('btnClear')}</button>`;
+
+            const legend = !target ? '' : `
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-500 mb-2">
+                    <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-red-100 shadow-[inset_0_-3px_0_#f87171]"></span>${t('legendCols')}</span>
+                    <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-violet-100 border border-violet-200"></span>${t('legendRows')}</span>
+                    <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-yellow-200"></span>${t('legendMark')}</span>
+                </div>`;
+
+            // Table: coefficients + estimator (filled from the bottom up to the target row)
+            const head = `<tr class="bg-slate-100 border-b border-slate-200"><th class="p-2 text-left font-semibold">${t('thSource')}</th>` +
+                cols.map(c => `<th class="p-2 font-mono font-bold ${omitCol(c) ? 'bg-red-100 text-red-800 shadow-[inset_0_-3px_0_#f87171]' : ''}">${c.subindex} <span class="text-[10px] font-normal ${omitCol(c) ? 'text-red-700' : 'text-slate-500'} block">${c.type === 'fixed' ? t('colFixed') : t('colRandom')}</span></th>`).join('') +
+                `<th class="p-2 text-left font-semibold">${t('thEstimator')}</th></tr>`;
+            const body = terms.map((row, ri) => {
+                const isT = ri === ti, oRow = omitRow(row);
+                const done = !target || (M - 1 - ri) <= emsStep;
+                const cells = cols.map(c => {
+                    const v = row.coeffs[c.subindex];
+                    const tone = oRow ? '' : (v === '0' ? 'text-slate-300' : 'font-bold text-slate-800');
+                    return `<td class="p-2 font-mono ${omitCol(c) ? 'bg-red-100/80' : ''} ${tone}">${v}</td>`;
+                }).join('');
+                return `<tr onclick="selectEmsRow(${ri})" class="cursor-pointer border-b border-slate-100 ${oRow ? 'bg-violet-50 text-slate-400' : 'hover:bg-slate-50'} ${isT ? 'font-bold' : ''}">
+                    <td class="p-2 text-left border-l-4 ${isT ? 'border-brand-600 bg-brand-50' : 'border-transparent'}"><button type="button" class="text-left" aria-pressed="${isT}" title="${t('selectRowTitle')}">${emsLabelHTML(row, target && !oRow ? hl : null)}</button></td>
+                    ${cells}
+                    <td class="p-2 text-left ems-left-align ${oRow ? 'opacity-60' : ''}">${done ? `$${row.emsLaTeX}$` : '<span class="text-slate-300">…</span>'}</td>
+                </tr>`;
+            }).join('');
+
+            // Explanation of the target row
+            let expl = '';
+            if (target) {
+                const it = v => /[a-z]/.test(v) ? `<i class="font-serif">${v}</i>` : v;
+                const usedCols = cols.filter(c => !tSubs.includes(c.subindex)).map(c => it(c.subindex));
+                const omittedRows = terms.filter(row => !participating.has(row)).map(row => row.label);
+                const dt = 'font-semibold text-slate-500 uppercase text-[10px] tracking-wider';
+                const steps = target.emsSteps.slice().reverse().map(st => {
+                    const prod = st.cells.length ? st.cells.map(it).join(' · ') : t('noCols');
+                    const res = st.zero
+                        ? `<span class="text-slate-400 line-through decoration-red-500">${t('noContribution')}</span>`
+                        : `<span>→ $${st.tex}$</span>`;
+                    return `<li class="py-1.5 flex flex-wrap gap-x-3 items-baseline"><span class="min-w-[130px]">${emsLabelHTML(st.row, null)}</span><span class="font-mono">${prod}</span>${res}</li>`;
+                }).join('');
+                expl = `
+                    <div class="mt-3 p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-3">
+                        <p class="text-sm font-bold text-slate-800">${t('targetRow')}: ${emsLabelHTML(target, hl)}</p>
+                        <dl class="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 items-baseline">
+                            <dt class="${dt}">${t('subsLbl')}</dt><dd>${tSubs.map(it).join(', ')}</dd>
+                            <dt class="${dt}">${t('colsLbl')}</dt><dd>${usedCols.length ? t('colsUsed', usedCols.join(', ')) : t('colsNone')}</dd>
+                            <dt class="${dt}">${t('rowsOmitted')}</dt><dd>${omittedRows.length ? omittedRows.join(', ') : t('none')}</dd>
+                        </dl>
+                        <ul class="divide-y divide-dashed divide-slate-200">${steps}</ul>
+                        <p class="text-sm ems-left-align">$E[MS_{${target.texLabel}}] = ${target.emsLaTeX}$</p>
+                    </div>`;
+            }
+
+            box.innerHTML = `<div class="flex flex-wrap items-center gap-2 text-xs mb-3">${controls}</div>${legend}
+                <div class="overflow-x-auto table-scrollbar"><table class="w-full text-xs text-center border-collapse"><thead>${head}</thead><tbody>${body}</tbody></table></div>${expl}`;
+            if (typeset && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([box]);
+        }
+
+        // Select a row of the table as the target row
+        function selectEmsRow(ri) {
+            if (!lastCalc) return;
+            emsStep = lastCalc.terms.length - 1 - ri;
+            renderEmsSteps();
+        }
+
+        // Move one row up (+1) or down (-1); the first step starts at the Residual
+        function stepEms(d) {
+            if (!lastCalc) return;
+            const M = lastCalc.terms.length;
+            emsStep = emsStep === null ? 0 : Math.min(Math.max(emsStep + d, 0), M - 1);
+            renderEmsSteps();
+        }
+
+        // Back to the full table without a target row
+        function clearEmsStep() {
+            emsStep = null;
+            renderEmsSteps();
         }
 
         // Tab Switching Logic
